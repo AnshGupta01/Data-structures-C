@@ -23,13 +23,14 @@ int main()
     create();
 
     do{
-    printf("What do you want to do?\n");
+    printf("\nWhat do you want to do?\n");
     printf("To Display - Press 1\n");
     printf("To insert in beginning - Press 2\n");
     printf("To insert in desired position - Press 3\n");
     printf("To insert in end - Press 4\n");
     printf("To Quit - Press 5\n");
     scanf("%d", &ans);
+    printf("\n");
 
     switch(ans){
         case 1: display();break;
@@ -37,9 +38,9 @@ int main()
         case 3: insert_at_pos();break;
         case 4: insert_end();break;
         case 5: break;
-        default: printf("Invalid Answer");
+        default: printf("Invalid Answer\n");
     }
-    } while(ans != 4);
+    } while(ans != 5);
     
     return 0;
 }
@@ -80,7 +81,7 @@ void display(){
     {
         printf("%d", temp -> data);
         temp = temp -> next;
-        printf("\n");
+        printf(" ");
         count++;
     }
 }
@@ -115,7 +116,7 @@ void insert_end(){
 // Function to insert at a desired location in the linked list
 void insert_at_pos(){
     int pos;
-    int i=1;
+    int i=0;
     newnode = (struct node*)malloc(sizeof(struct node));
 
     printf("Enter the Position you want to insert the vairable into?: ");
@@ -132,12 +133,10 @@ void insert_at_pos(){
             i++;
         }
     }
-
     printf("Enter your Data which you want to insert: ");
     scanf("%d", &newnode -> data);
     newnode -> next = temp -> next;
     temp -> next = newnode;
-
 }
 
 
