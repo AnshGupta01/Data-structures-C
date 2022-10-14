@@ -14,7 +14,7 @@ void insert_beg();
 void insert_end();
 void insert_at_pos();
 
-int count = 1;
+int count = 0;
 
 // Main function of the program
 int main()
@@ -116,7 +116,6 @@ void insert_end(){
 // Function to insert at a desired location in the linked list
 void insert_at_pos(){
     int pos;
-    int i=0;
     newnode = (struct node*)malloc(sizeof(struct node));
 
     printf("Enter the Position you want to insert the vairable into?: ");
@@ -127,6 +126,7 @@ void insert_at_pos(){
     else
     {
         temp = head;
+        int i=1;
         while(i<pos)
         {
             temp = temp -> next;
