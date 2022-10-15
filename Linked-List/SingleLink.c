@@ -1,3 +1,4 @@
+//  Created on Friday 14th October 2022
 #include <stdio.h>
 #include<stdlib.h>
 
@@ -118,12 +119,15 @@ void insert_end(){
 
 // Function to insert at a desired location in the linked list
 void insert_at_pos(){
-    int pos;
+    int pos = 1;
     newnode = (struct node*)malloc(sizeof(struct node));
     printf("Enter the Position you want to insert the vairable into?: ");
     scanf("%d", &pos);
-    if(pos > count) {
+    if(pos > count || pos < 1) {
         printf("Invalid Position");    
+    }
+    else if(pos == 1){
+        insert_beg();
     }
     else
     {
