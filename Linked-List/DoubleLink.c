@@ -12,6 +12,7 @@ struct node *head, *newnode, *temp;
 void create();
 void display();
 
+
 int main(){
     int ans;
     create();
