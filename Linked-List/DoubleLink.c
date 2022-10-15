@@ -9,12 +9,11 @@ struct node
     struct node *prev;    
 };
 struct node *head, *newnode, *temp, *tail, *nextnode;
-int count = 0;
 int len = 0;
 
 void create();
 void display();
-void get_len();
+int get_len();
 void print_len();
 void insert_beg();
 void insert_end();
@@ -26,12 +25,12 @@ int main(){
     create();
     do{
     printf("\nWhat do you want to do?\n");
-    printf("Press 1 to display\n");
-    printf("Press 2 to Print the length\n");
-    printf("Press 3 to insert at beginning\n");
-    printf("Press 4 to insert at the end\n");
-    printf("Press 5 to insert at a desired position\n");
-    printf("Press 6 to Quit\n");
+    printf("1. Display\n");
+    printf("2. Print Length\n");
+    printf("3. Insert at beginning\n");
+    printf("4. Insert at end\n");
+    printf("5. Insert at desired location\n");
+    printf("6. Quit\n");
     printf("Answer: ");
     scanf("%d", &ans);
     switch(ans)
@@ -41,10 +40,10 @@ int main(){
         case 3: insert_beg();break;
         case 4: insert_end();break;
         case 5: insert_at_pos();break;
-        case 6: break;
+        case 6: system("cls");break;
         default: break;
     }
-    } while (ans != 2);
+    } while (ans != 6);
 
     return 0;
 }
@@ -56,7 +55,7 @@ void create()
     int choice = 1;
     do{
     newnode = (struct node*)malloc(sizeof(struct node));
-    printf("Enter data for the first node: ");
+    printf("Enter data for the node: ");
     scanf("%d", &newnode -> data);
     newnode -> prev = 0;
     newnode -> next = 0;
@@ -83,23 +82,22 @@ void display(){
     while (temp != 0){
         printf("%d ", temp -> data);
         temp = temp -> next;
-        count++;
     }
-    get_len();
 }
 
 // Function to get length of the linked list
-void get_len(){
+int get_len(){
     temp = head;
     while(temp != 0){
         temp = temp -> next;
-        len++;
+        len++;   
     }
+    return len;
 }
 
 // function to print the length of the linked list
 void print_len(){
-    printf("The number of nodes in the linked list is/are: %d", len);
+    printf("The number of nodes in the linked list is/are: %d", get_len());
 }
 
 // Function to insert a node at the beginning
@@ -136,7 +134,7 @@ void insert_at_pos(){
     printf("At which position do you want to add the data?: ");
     scanf("%d", &pos);
 
-    if(pos < 1 || pos > len){
+    if(pos < 1 || pos > get_len()){
         printf("Invalid entry");
     }
     else if(pos == 1){

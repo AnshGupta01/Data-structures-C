@@ -28,17 +28,17 @@ int main()
     create();
     do{
     printf("\nWhat do you want to do?\n");
-    printf("To Display - Press 1\n");
-    printf("To insert in beginning - Press 2\n");
-    printf("To insert in desired position - Press 3\n");
-    printf("To insert in end - Press 4\n");
+    printf("1. Display\n");
+    printf("2. Insert in beginning\n");
+    printf("3. Insert in Desired Position\n");
+    printf("4. Insert in end\n");
     printf("\n");
-    printf("To Delete in Starting - Press 5\n");
-    printf("To Delete in end - Press 6\n");
-    printf("To Delete at Desired Position - Press 7\n");
-    printf("To get length of linked list - Press 8\n");
-    printf("To reverse the linked list - Press 9\n");
-    printf("To Quit - Press 10\n");
+    printf("5. Delete in beginning\n");
+    printf("6. Delete in end\n");
+    printf("7. Delete at location\n");
+    printf("8. Get length of list\n");
+    printf("9. Reverse the list\n");
+    printf("10. Quit\n");
     printf("Answer: ");
     scanf("%d", &ans);
     printf("\n");
@@ -52,7 +52,7 @@ int main()
         case 7: delete_at_pos();break;
         case 8: get_len();break;
         case 9: reverse_linked();break;
-        case 10: break;
+        case 10: system("cls");break;
         default: printf("Invalid Answer\n");
     }
     } while(ans != 10);
