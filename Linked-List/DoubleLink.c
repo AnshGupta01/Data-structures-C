@@ -8,7 +8,7 @@ struct node
     struct node *next;
     struct node *prev;    
 };
-struct node *head, *newnode, *temp, *tail, *nextnode;
+struct node *head, *newnode, *temp, *tail, *nextnode, *currentnode;
 int len = 0;
 
 void create();
@@ -18,6 +18,10 @@ void print_len();
 void insert_beg();
 void insert_end();
 void insert_at_pos();
+void delete_beg();
+void delete_end();
+void delete_at_pos();
+void reverse_list();
 
 //  Main function
 int main(){
@@ -30,7 +34,11 @@ int main(){
     printf("3. Insert at beginning\n");
     printf("4. Insert at end\n");
     printf("5. Insert at desired location\n");
-    printf("6. Quit\n");
+    printf("6. Delete from beginning\n");
+    printf("7. Delete from End\n");
+    printf("8. Delete from Desired Position\n");
+    printf("9. Reverse the linked list\n");
+    printf("10. Quit\n");
     printf("Answer: ");
     scanf("%d", &ans);
     switch(ans)
@@ -40,11 +48,14 @@ int main(){
         case 3: insert_beg();break;
         case 4: insert_end();break;
         case 5: insert_at_pos();break;
-        case 6: system("cls");break;
+        case 6: delete_beg();break;
+        case 7: delete_end();break;
+        case 8: delete_at_pos();break;
+        case 9: reverse_list();break;
+        case 10:break;
         default: break;
     }
-    } while (ans != 6);
-
+    } while (ans != 10);
     return 0;
 }
 
@@ -80,7 +91,7 @@ void create()
 void display(){
     temp = head;
     while (temp != 0){
-        printf("%d ", temp -> data);
+        printf("%d-->", temp -> data);
         temp = temp -> next;
     }
 }
@@ -159,4 +170,75 @@ void insert_at_pos(){
         temp -> next = newnode;
         nextnode -> prev = newnode;
     }
+}
+
+// Function to delete from beginning
+void delete_beg(){
+    temp = head;
+    if (head == 0){
+        printf("The list is empty");
+    }
+    else{
+        head = head -> next;
+        head -> prev = 0;
+        free(temp);
+    }
+}
+
+// Function to delete from end
+void delete_end(){
+    if (tail == 0){
+        printf("Invalid List");
+    }
+    else{
+        temp = tail;
+        tail -> prev -> next = 0;
+        tail = tail -> prev;
+        free(temp);
+    }
+}
+
+// Function to delete from a desired position
+void delete_at_pos(){
+    int pos;
+    int i = 1;
+    printf("Enter the position: ");
+    scanf("%d", &pos);
+
+    if (pos < 1 || pos > get_len()){
+        printf("Invalid Position");
+    }
+    else if(pos == 1){
+        delete_beg();
+    }
+    else if(pos == get_len()){
+        delete_end();
+    }
+    else
+    {
+        temp = head;
+        while(i < pos)
+        {
+            temp = temp -> next;
+            i++;
+        }
+        temp -> prev -> next = temp -> next;
+        temp -> next -> prev = temp -> prev;
+        free(temp);
+    }
+}
+
+// Function to reverse the linked list
+void reverse_list(){
+    currentnode = head;
+    while (currentnode !=0)
+    {
+        nextnode = currentnode -> next;
+        currentnode -> next = currentnode -> prev;
+        currentnode -> prev = nextnode;
+        currentnode = nextnode;
+    }
+    currentnode = head;
+    head = tail;
+    tail = currentnode;
 }
