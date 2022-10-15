@@ -38,6 +38,7 @@ int main()
     printf("To get length of linked list - Press 8\n");
     printf("To reverse the linked list - Press 9\n");
     printf("To Quit - Press 10\n");
+    printf("Answer: ");
     scanf("%d", &ans);
     printf("\n");
     switch(ans){
@@ -53,7 +54,7 @@ int main()
         case 10: break;
         default: printf("Invalid Answer\n");
     }
-    } while(ans != 9);
+    } while(ans != 10);
     return 0;
 }
 
