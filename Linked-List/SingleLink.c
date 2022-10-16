@@ -6,8 +6,7 @@ struct node
     {
         int data;
         struct node *next;
-    };
-struct node *head, *newnode, *temp, *prevnode, *currentnode, *nextnode;
+    }*head, *newnode, *temp, *prevnode, *currentnode, *nextnode;
 
 int count = 0;
 void display();
@@ -32,7 +31,6 @@ int main()
     printf("2. Insert in beginning\n");
     printf("3. Insert in Desired Position\n");
     printf("4. Insert in end\n");
-    printf("\n");
     printf("5. Delete in beginning\n");
     printf("6. Delete in end\n");
     printf("7. Delete at location\n");
