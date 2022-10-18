@@ -6,7 +6,8 @@ struct node
     {
         int data;
         struct node *next;
-    }*head, *newnode, *temp, *prevnode, *currentnode, *nextnode;
+    };
+struct node *head, *newnode, *temp, *prevnode, *currentnode, *nextnode;
 
 int count = 0;
 void display();
