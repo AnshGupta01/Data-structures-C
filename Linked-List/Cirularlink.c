@@ -13,6 +13,7 @@ int get_len();
 void print_len();
 void insert();
 void delete();
+void rever();
 
 int main(){
 int ans;
@@ -23,7 +24,8 @@ int ans;
     printf("2. Print Length\n");
     printf("3. Insert\n");
     printf("4. Delete\n");
-    printf("5. Quit\n");
+    printf("5. Reverse the list\n");
+    printf("6. Quit\n");
     printf("Answer: ");
     scanf("%d", &ans);
     switch(ans)
@@ -32,10 +34,11 @@ int ans;
         case 2: print_len();break;
         case 3: insert();break;
         case 4: delete();break;
-        case 5:break;
+        case 5: rever();break;
+        case 6:break;
         default: break;
     }
-    } while (ans != 5);
+    } while (ans != 6);
     return 0;
 }
 
@@ -148,21 +151,34 @@ void insert(){
     printf("Enter the data for your node: ");
     scanf("%d", &newnode -> data);
     int choice;
-    int pos;
-    int i = 1;
     printf("Where you wanna insert your node?\n");
     printf("1. First Position\n2. Middle\n3. Last Position\n");
     scanf("%d", &choice);
-
+    int pos;
+    int i = 1;
     switch(choice){
+
         case 1: newnode -> next = tail -> next;
         tail -> next = newnode;
         break;
 
-        case 2:printf("Enter the Position you want to insert at: ");
+        case 2:
+        printf("Enter the Position you want to insert at: ");
         scanf("%d", &pos);
-
-
+        int l = get_len();
+        if (pos < 2 || pos > l){
+            printf("Invalid Position, Please Continue!!");
+        }
+        else{
+            temp = tail -> next;
+            while(i < pos - 1){
+                temp = temp -> next;
+                i++;
+            }
+            newnode -> next = temp -> next;
+            temp -> next = newnode;
+        }
+        break;
 
         case 3: newnode -> next = tail -> next;
         tail -> next = newnode;
@@ -175,5 +191,88 @@ void insert(){
 
 // Function to delete a Node from the list.
 void delete(){
+    int choice;
+    int l;
+    int i;
+    int pos;
+    temp = tail -> next;
+    printf("Where do you want to delete your node from?");
+    printf("\n1. Beginning\n2. Middle\n3. End\n");
+    scanf("%d", &choice);
 
+    struct node *current, *prev, *nextnode;
+
+    switch (choice)
+    {
+
+    case 1:
+        if(temp -> next == temp)
+        {
+            tail = NULL;
+            free(temp);
+        }
+        else
+        {
+            tail -> next = temp -> next;
+            free(temp);
+        }
+        break;
+
+    case 2: l = get_len();
+    printf("At what position to delete the node?: ");
+    scanf("%d", pos);
+    current = tail ->next;
+    if (pos < 2 || pos > l)
+    {
+        printf("Invalid Pos");
+    }
+    else
+    {
+        while (i < pos - 1){
+            current = current -> next;
+            i++;
+        }
+        nextnode = current -> next;
+        current -> next = nextnode -> next;
+        free(nextnode);
+    }
+    break;
+
+    case 3:
+        current = tail -> next;
+        if (current -> next == current)
+        {
+            tail = NULL;
+            free(current);
+        }
+        else
+        {
+            while (current -> next != tail -> next)
+            {
+                prev = current;
+                current = current -> next;
+            }
+            prev -> next = tail -> next;
+            tail = prev;
+            free (current);
+        }
+        break;
+
+    default: break;
+    }
+}
+
+// Function to reverse the list.
+void rever(){
+    struct node *current, *prev, *nextnode;
+    current = tail -> next;
+    nextnode = current -> next;
+    while (current != tail){
+        prev = current;
+        current = nextnode;
+        nextnode = current -> next;
+        current -> next = prev;
+    }
+    nextnode -> next = tail;
+    tail = nextnode;
 }
